@@ -1,23 +1,24 @@
+---
+output: github_document
+---
 
 # R6 - with extensions
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
-Currently R6 supports overrides for the default `print` and `plot`
-functions in R but leaves out basic operation overrides such as
-addition, subtraction, multiplication, division, etc. This fork extends
-the R6 reference class to inclide these.
+Currently R6 supports overrides for the default `print` and `plot` functions in R but leaves out 
+basic operation overrides such as addition, subtraction, multiplication, division, etc. This fork
+extends the R6 reference class to inclide these.
 
-The override methods must be defined in the `private` section of the
-class declaration. Currently the following overrides can be defined:
+The override methods must be defined in the `private` section of the class declaration. Currently
+the following overrides can be defined:  
 
-  - `'+'`
-  - `'-'`
-  - `'*'`
-  - `'/'`
-  - `'^'`
+* `'+'`
+* `'-'`
+* `'*'`
+* `'/'`
+* `'^'`
 
 ## Installation
 
@@ -28,16 +29,13 @@ devtools::install_github("zachzIAM/R6")
 ```
 
 ## Examples
-
 ``` r
 library(R6)
 ```
 
 ### Addition
-
 This is a basic example which shows you how to solve a common problem:
-
-``` r
+```{r add}
 with_add <- R6::R6Class(
   classname = "with_add",
   public = list(
@@ -67,11 +65,10 @@ result <- add + add
 cat(paste0("x = ", result$x, "; y = ", result$y))
 ```
 
-    ## x = 10; y = 2.30042296548653
+
 
 ### Subtraction
-
-``` r
+``` {r subtract}
 with_sub <- R6::R6Class(
   classname = "with_sub",
   public = list(
@@ -101,11 +98,8 @@ result <- sub - sub
 cat(paste0("x = ", result$x, "; y = ", result$y))
 ```
 
-    ## x = 0; y = 0
-
 ### Multiplication
-
-``` r
+``` {r multiply}
 with_mult <- R6::R6Class(
   classname = "with_mult",
   public = list(
@@ -135,11 +129,8 @@ result <- mult * mult
 cat(paste0("x = ", result$x, "; y = ", result$y))
 ```
 
-    ## x = 25; y = 0.0679098478003616
-
 ### Division
-
-``` r
+``` {r divide}
 with_div <- R6::R6Class(
   classname = "with_div",
   public = list(
@@ -169,11 +160,8 @@ result <- div / div
 cat(paste0("x = ", result$x, "; y = ", result$y))
 ```
 
-    ## x = 1; y = 1
-
 ### Exponentiation
-
-``` r
+``` {r exponentiate}
 with_pow <- R6::R6Class(
   classname = "with_pow",
   public = list(
@@ -203,4 +191,3 @@ result <- pow ^ pow
 cat(paste0("x = ", result$x, "; y = ", result$y))
 ```
 
-    ## x = 3125; y = 0.768294955342444
