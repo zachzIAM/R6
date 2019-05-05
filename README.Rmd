@@ -7,6 +7,7 @@ output: github_document
 <!-- badges: start -->
 <!-- badges: end -->
 
+## Motivation  
 Currently R6 supports overrides for the default `print` and `plot` functions in R but leaves out 
 basic operation overrides such as addition, subtraction, multiplication, division, etc. This fork
 extends the R6 reference class to inclide these.
@@ -19,6 +20,36 @@ the following overrides can be defined:
 * `'*'`
 * `'/'`
 * `'^'`
+
+## On basic operators and R6
+There is probably a good reason R6 have not incorporated basic operators already. E.g. overriding
+the `$` and `$<-` operators (if at all possible) would potentially break the whole R6 structure
+since it uses that syntax to accessing a given class instance's methods, properties and variables.
+The same applies to the `[`, `[<-`, `[[` and `[[<-` basic operators.
+
+On the other hand the basic logical and arithmetic operators are (IMO) fair game. Besides the
+overrides described above the following additional operation overrides can potentially be added in
+the future:
+
+* `%%`
+* `%*%`
+* `%/%`
+* `<`
+* `>`
+* `<=`
+* `>=`
+* `==`
+* `!=`
+* `|`
+* `||`
+* `&`
+* `&&`
+* `!`
+
+## Not covered...
+Overrides like this can extend quite far... e.g. if we already have basic operators, plot and print 
+overrides then why not allow for other Primitives such as `sum`, `length`, `abs`, etc. This is beyond
+the scope of this fork.
 
 ## Installation
 
@@ -35,6 +66,10 @@ library(R6)
 
 ### Addition
 This is a basic example which shows you how to solve a common problem:
+```{r echo=FALSE}
+set.seed(1)
+```
+
 ```{r add}
 with_add <- R6::R6Class(
   classname = "with_add",
@@ -190,4 +225,3 @@ pow <- with_pow$new(5, rnorm(1))
 result <- pow ^ pow
 cat(paste0("x = ", result$x, "; y = ", result$y))
 ```
-

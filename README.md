@@ -5,6 +5,8 @@
 
 <!-- badges: end -->
 
+## Motivation
+
 Currently R6 supports overrides for the default `print` and `plot`
 functions in R but leaves out basic operation overrides such as
 addition, subtraction, multiplication, division, etc. This fork extends
@@ -18,6 +20,41 @@ class declaration. Currently the following overrides can be defined:
   - `'*'`
   - `'/'`
   - `'^'`
+
+## On basic operators and R6
+
+There is probably a good reason R6 have not incorporated basic operators
+already. E.g. overriding the `$` and `$<-` operators (if at all
+possible) would potentially break the whole R6 structure since it uses
+that syntax to accessing a given class instance’s methods, properties
+and variables. The same applies to the `[`, `[<-`, `[[` and `[[<-` basic
+operators.
+
+On the other hand the basic logical and arithmetic operators are (IMO)
+fair game. Besides the overrides described above the following
+additional operation overrides can potentially be added in the future:
+
+  - `%%`
+  - `%*%`
+  - `%/%`
+  - `<`
+  - `>`
+  - `<=`
+  - `>=`
+  - `==`
+  - `!=`
+  - `|`
+  - `||`
+  - `&`
+  - `&&`
+  - `!`
+
+## Not covered…
+
+Overrides like this can extend quite far… e.g. if we already have basic
+operators, plot and print overrides then why not allow for other
+Primitives such as `sum`, `length`, `abs`, etc. This is beyond the scope
+of this fork.
 
 ## Installation
 
@@ -67,7 +104,7 @@ result <- add + add
 cat(paste0("x = ", result$x, "; y = ", result$y))
 ```
 
-    ## x = 10; y = 2.30042296548653
+    ## x = 10; y = -1.25290762148466
 
 ### Subtraction
 
@@ -135,7 +172,7 @@ result <- mult * mult
 cat(paste0("x = ", result$x, "; y = ", result$y))
 ```
 
-    ## x = 25; y = 0.0679098478003616
+    ## x = 25; y = 0.698275177878341
 
 ### Division
 
@@ -203,4 +240,4 @@ result <- pow ^ pow
 cat(paste0("x = ", result$x, "; y = ", result$y))
 ```
 
-    ## x = 3125; y = 0.768294955342444
+    ## x = 3125; y = 0.693638177846628
